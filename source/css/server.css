@@ -95,7 +95,8 @@ img {
 	font-size: 0.9rem;
 	color: #FFFFFF;
 	background-color: #222222;
-	font-weight: 500; }
+	font-weight: 500;
+	cursor: pointer; }
 #main-content pre {
 	padding: 0.8rem;
 	margin-top: 0;
