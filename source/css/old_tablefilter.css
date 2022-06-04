@@ -1,0 +1,32 @@
+/* old table and search input */
+#searchinput {
+	text-align: center; }
+#searchbox {
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	background-color: #303030;
+	color: #01a1fa;
+	font-size: 16px;
+	text-align: center;
+	padding: 12px 0px 12px 0px;
+	border: 0px solid #ddd;
+	margin-bottom: 12px;
+	width: 90%; }
+#searchbox:hover {
+	box-shadow: 0 3px 5px 0 rgba(0,0,0,0.2); }
+#help {
+	border-collapse: collapse;
+	width: 90%;
+	border: 1px solid #01a1fa;
+	font-size: 18px;
+	margin: auto; }
+#help th, #help td {
+	text-align: left;
+	padding: 12px; }
+#help tr {
+	border-bottom: 1px solid #01a1fa;
+	background: #303030; }
+#help tr.header, #help tr:hover {
+	background-color: #151515; }
+#help td a { 
+	text-decoration: none; }

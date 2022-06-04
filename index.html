@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<!-- General meta tag-->
+		<meta charset="utf-8">
+		<link rel="icon" type="image/png" href="media/naologo.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Front Page meta tag -->
+		<title>Genshin Database</title>
+		<meta name="copyright" content="Copyright &#169; Farise">
+	<!-- Front Page script & css-->
+		<link rel="stylesheet" href="source/css/server.css">
+		<link rel="stylesheet" href="source/css/navigation.css">
+		<link rel="stylesheet" href="source/css/tablefilter.css">
+		<style>
+			section {
+				color: #01a1fa; }
+			.top-border {
+				max-width: none; }
+			#main-content-head {
+				max-width: 74rem;
+				padding: 1rem 1rem;
+				max-width: none; }
+			#main-content {
+				max-width: 72rem;
+				padding: 1rem 2rem;
+				background: #222222; }
+			h1, h2 {
+				text-align: center;
+				color: #01a1fa;	
+				font-family: "Titillium Web", sans-serif;
+				padding: 10px;
+				max-width: 70rem;
+				margin: 0px auto;
+				font-size: 17px; }
+			.credit {
+				background: #303030;
+				padding: 10px;
+				margin: 0px auto;
+				text-align: center; }
+			#searchinput {
+				text-align: center; }
+			#searchbox {
+				background-position: 10px 10px;
+				background-repeat: no-repeat;
+				background-color: #303030;
+				color: #01a1fa;
+				font-size: 16px;
+				text-align: center;
+				padding: 12px 0px 12px 0px;
+				border: 0px solid #ddd;
+				margin-bottom: 12px;
+				width: 90%; }
+			#searchbox:hover {
+				box-shadow: 0 3px 5px 0 rgba(0,0,0,0.2); }
+			#game {
+				border-collapse: collapse;
+				width: 90%;
+				border: 1px solid #01a1fa;
+				font-size: 18px;
+				margin: auto; }
+			#game th, #game td {
+				font-size: 14px;
+				text-align: left;
+				padding: 12px; }
+			#game tr {
+				border-bottom: 1px solid #01a1fa;
+				background: #151515; }
+			#game tr.header, #game tr:hover {
+				background-color: #303030; }
+			#game td a {  }
+		</style>
+	</head>
+	<!-- Front Page Content -->
+	<body id="restricted">
+		<header>
+			<nav>
+				<div class="container">
+					<ul>
+						<li><a href="index.html">Basic CMD</a></li>
+						<li><a href="character.html">Character</a></li>
+						<li><a href="weapon.html">Weapon</a></li>
+						<li><a href="resource.html">Resources</a></li>
+						<li><a href="monster.html">Monster</a></li>
+						<li><a href="artifact.html">Artifact</a></li>
+						<li><span>isephyr v1.623.221</span></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<section>
+			<div style="background: #01a1fa;" class="top-border"></div>
+			<div style="text-align: center;" id="main-content-head">
+				<h1>Genshin Database</h1>
+				Default Genshin Command
+			</div>
+			<div id="main-content">
+				<div class="table-filters">
+					<label for="filter-title">Command Title</label>
+					<input type="text" class="input-text" id="filter-name" data-filter-col="1">
+					<label for="filter-tick1">Command Type</label>
+					<select id="filter-type" data-filter-col="4" style="min-width:60px">
+						<option value="">Command Type</option>
+						<option value="1">Technical Command</option>
+						<option value="2">Non-Technical</option>
+					</select>
+					<label for="filter-uid" style="display:none;">UID</label>
+					<input type="text" class="input-text" placeholder="target UID" id="filter-uid" style="display:none;">
+				</div>
+				<table id="game">
+					<thead>
+						<tr>
+							<th>Command</th>
+							<th>Information</th>
+							<th>Example</th>
+							<th>Copy</th>
+							<th>type</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>/account</td>
+							<td>Account Creation and Deletion</td>
+							<td>/account <code>create / delete</code> <code>name</code> <code>UID</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/say <code>/sendservmsg</code><code style="display:none">sendservermessage</code><code style="display:none">sendmessage</code></td>
+							<td>Send a message to a player in same server</td>
+							<td>/say <code>message</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/setfetterlevel <code>/setfetterlvl</code></td>
+							<td>Set current character's companionship level</td>
+							<td>/setfetterlevel <code>value</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/setworldlevel <code>/setworldlvl</code></td>
+							<td>Set current world level</td>
+							<td>/setworldlvl <code>value</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/setstats  <code>/stats</code></td>
+							<td>Set current character's stats, will be cleared after defeating an enemy</td>
+							<td>/setstats <code>type</code> <code>value</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/give <code>/g</code><code style="display:none">/item</code><code style="display:none">/giveitem</code></td>
+							<td>Give an item</td>
+							<td>
+								/g <code>item id</code> <code>value</code>
+								</br>
+								/g <code>item id</code> <code>value</code> <code>level</code> <code>refinement level</code>
+							</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/giveall <code>/givea</code></td>
+							<td>Give all possible item</td>
+							<td>/givea</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/drop <code>/d</code><code style="display:none">/dropitem</code></td>
+							<td>Drop an item/s</td>
+							<td>/d <code>item id</code> <code>value</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/killall</td>
+							<td>Kill all enemy in current scene</td>
+							<td>/killall</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/talent</td>
+							<td>Set current character's talent, will be cleared after defeating an enemy</td>
+							<td>/talent <code>type N/E/Q</code> <code>value</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/list</td>
+							<td>Check currently online players</td>
+							<td>/list</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/heal <code>/h</code></td>
+							<td>Heal current character</td>
+							<td>/h</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/killcharacter</td>
+							<td>Kill current character</td>
+							<td>/killcharacter</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/giveart <code>/gart</code></td>
+							<td>Give an artifact with specific stats</td>
+							<td>/gart <code>artifact type</code> <code>artifact type</code> <code>artifact substat</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/givechar <code>/givec</code></td>
+							<td>Give a character with specific stats</td>
+							<td>/givechar <code>char id</code> <code>char level</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/tpall</td>
+							<td>Teleport all player in your world to your position</td>
+							<td>/tpall</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/teleport <code>/tp</code></td>
+							<td>Teleport to a specific location XYZ / Scene</td>
+							<td>/tp <code>X</code> <code>Y</code> <code>Z</code> <code>Scene ID</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/resetconst <code>/resetconstellation</code></td>
+							<td>Reset current character, need to relog to see any changes</td>
+							<td>/resetconst</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/weather <code>/w</code></td>
+							<td>Set current in-game weather and climate</td>
+							<td>/w <code>climate code</code> <code>weather code</code> ???</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/language</td>
+							<td>Change current displayed language</td>
+							<td>/language <code>Language ID</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/quest</td>
+							<td>Start or End a Quest</td>
+							<td>/quest <code>add / finish</code> <code>Quest ID</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/unlocktower</td>
+							<td>Unlock Spiral Abyss Floor</td>
+							<td>/unlocktower <code>Tower Level</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/changescene <code>/scene</code></td>
+							<td>Change game level / scene</td>
+							<td>/scene <code>Scene ID</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/stop</td>
+							<td>Stop the Server</td>
+							<td>/stop</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/position <code>/pos</code></td>
+							<td>Get current player position</td>
+							<td>/pos</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/broadcast <code>/b</code></td>
+							<td>Send a message to all online players</td>
+							<td>-</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/reload</td>
+							<td>Reload Server Configuration</td>
+							<td>/reload</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/sendmail</td>
+							<td>Send a mail to a specific user</td>
+							<td>-</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/enterdungeon</td>
+							<td>Enter a dungeon, requires a domain ID <code>MAX VALUE 50</code></td>
+							<td>/enterdungeong <code>Dungeon ID</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/godmode</td>
+							<td>Turn on/off God Mode</td>
+							<td>/godmode <code>on / off</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/coop</td>
+							<td>Force someone to join other player's world</td>
+							<td>-</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/restart</td>
+							<td>Restart current session</td>
+							<td>/restart</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/clear <code>/clear</code></td>
+							<td>Clear all unused items / artifacts / weapons / materials</td>
+							<td>/clearalll or /clear <code>art / wp / mat</code></td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/permission</td>
+							<td>Grants or Remove Permission from player</td>
+							<td>-</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/resetshop</td>
+							<td>Reset Shop</td>
+							<td>-</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/help</td>
+							<td>Give you full commands</td>
+							<td>/help</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Technical<a style="display:none">1</a></td>
+						</tr>
+						<tr>
+							<td>/spawn</td>
+							<td>Spawn a specific monster</td>
+							<td>n/an/an/an/a</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+						<tr>
+							<td>/kick <code>/k</code></td>
+							<td>Kick a player from the server</td>
+							<td>n/an/an/an/a</td>
+							<td><i class="copy"><a style="display: none";>copy</a></i></td>
+							<td>Non-Technical<a style="display:none">2</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="credit">Just a personal project</div>
+		</section>
+		<!-- General Footer -->
+		<!-- Afterload script & css-->
+		<script src="source/js/jquery-3.3.1.min.js"></script>
+		<script src="source/js/filtable.js?dev"></script>
+		<script>
+		$('nav li').hover(
+			function() {
+				$('ul', this).stop().slideDown(200); },
+			function() {
+		    	$('ul', this).stop().slideUp(200); }
+		);
+		</script>
+		<script>
+			$(function(){
+			// Basic Filtable usage - pass in a div with the filters and the plugin will handle it
+			$('#game').filtable({ controlPanel: $('.table-filters')});
+			});
+		</script>
+	</body>
+</html>

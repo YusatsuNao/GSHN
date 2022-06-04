@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<!-- General meta tag-->
+		<meta charset="utf-8">
+		<link rel="icon" type="image/png" href="media/naologo.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Front Page meta tag -->
+		<title>Genshin Database</title>
+		<meta name="copyright" content="Copyright &#169; Farise">
+	<!-- Front Page script & css-->
+		<link rel="stylesheet" href="source/css/server.css">
+		<link rel="stylesheet" href="source/css/navigation.css">
+		<link rel="stylesheet" href="source/css/tablefilter.css">
+		<style>
+			section {
+				color: #01a1fa; }
+			.top-border {
+				max-width: none; }
+			#main-content-head {
+				max-width: 74rem;
+				padding: 1rem 1rem;
+				max-width: none; }
+			#main-content {
+				max-width: 72rem;
+				padding: 1rem 2rem;
+				background: #222222; }
+			h1, h2 {
+				text-align: center;
+				color: #01a1fa;	
+				font-family: "Titillium Web", sans-serif;
+				padding: 10px;
+				max-width: 70rem;
+				margin: 0px auto;
+				font-size: 17px; }
+			.credit {
+				background: #303030;
+				padding: 10px;
+				margin: 0px auto;
+				text-align: center; }
+			#searchinput {
+				text-align: center; }
+			#searchbox {
+				background-position: 10px 10px;
+				background-repeat: no-repeat;
+				background-color: #303030;
+				color: #01a1fa;
+				font-size: 16px;
+				text-align: center;
+				padding: 12px 0px 12px 0px;
+				border: 0px solid #ddd;
+				margin-bottom: 12px;
+				width: 90%; }
+			#searchbox:hover {
+				box-shadow: 0 3px 5px 0 rgba(0,0,0,0.2); }
+			#game {
+				border-collapse: collapse;
+				width: 90%;
+				border: 1px solid #01a1fa;
+				font-size: 18px;
+				margin: auto; }
+			#game th, #game td, #game .diva, #game .divb {
+				font-size: 14px;
+				text-align: left;
+				padding: 12px; }
+			#game tr, #game .diva {
+				border-bottom: 1px solid #01a1fa;
+				background: #151515; }
+			#game tr.header, #game tr:hover, #game .diva.header, #game .diva:hover, {
+				background-color: #303030; }
+			#game td a, #game .divb a {  }
+			.input-text-output {
+				width: 70%;
+				background-color: #fff;
+				border: 1px solid #ccc; }
+			.tooltip {
+				position: relative;
+				display: inline-block; }
+			.tooltip .tooltiptext {
+				visibility: hidden;
+				width: 140px;
+				background-color: #555;
+				color: #fff;
+				text-align: center;
+				border-radius: 6px;
+				padding: 5px;
+				position: absolute;
+				z-index: 1;
+				bottom: 150%;
+				left: 50%;
+				margin-left: -75px;
+				opacity: 0;
+				transition: opacity 0.3s; }
+			.tooltip .tooltiptext::after {
+				content: "";
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				margin-left: -5px;
+				border-width: 5px;
+				border-style: solid;
+				border-color: #555 transparent transparent transparent; }
+			.tooltip:hover .tooltiptext {
+				visibility: visible;
+				opacity: 1;	}
+			code a {
+				color: #fffff1; }
+			.table-filters {
+				margin: 0px auto;
+				width: 65%; }
+			.button1 {
+				background-color: #4CAF50; /* Green */
+				border: none;
+				color: #22222;
+				padding: 5px 5px;
+				margin: 1px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				transition-duration: 0.4s;
+				cursor: pointer; }
+			.button1:hover {
+				background-color: #008CBA;
+				color: white; }
+			.button2 {
+				background-color: #4CAF50; /* Green */
+				border: none;
+				color: #22222;
+				padding: 5px 5px;
+				margin: 1px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				transition-duration: 0.4s;
+				cursor: pointer; }
+			.button2:hover {
+				background-color: #008CBA;
+				color: white; }
+			.button3 {
+				background-color: #4CAF50; /* Green */
+				border: none;
+				color: #22222;
+				min-width: 7%;
+				padding: 5px 5px;
+				margin: 1px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				transition-duration: 0.4s;
+				cursor: pointer; }
+			.button3:hover {
+				background-color: #008CBA;
+				color: #white; }
+			#artifactoutput {
+				width: 100%; }
+			#artifact-main {
+				margin: 0px auto;
+				max-width: 72.5%; }
+			#artifact-stat {
+				margin: 0px auto;
+				display: table;
+				max-width: 72.5%; }
+			#artifact-sub {
+				margin: 0px auto;
+				display: table;
+				max-width: 72.5%; }
+			.subtype1 {
+				background-color: #8eea83; }
+			.subtype2 {
+				background-color: #31e09d; }
+			.subtype3 {
+				background-color: #27bbe4; }
+			.subtype4 {
+				background-color: #de79f0; }
+			.addright {
+				padding-left: 20px; }
+			.addright2 {
+				min-width: 150px; }
+		</style>
+	</head>
+	<!-- Front Page Content -->
+	<body id="restricted">
+		<header>
+			<nav>
+				<div class="container">
+					<ul>
+						<li><a href="index.html">Basic CMD</a></li>
+						<li><a href="character.html">Character</a></li>
+						<li><a href="weapon.html">Weapon</a></li>
+						<li><a href="resource.html">Resources</a></li>
+						<li><a href="monster.html">Monster</a></li>
+						<li><a href="artifact.html">Artifact</a></li>
+						<li><span>isephyr v1.623.221</span></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<section>
+			<div style="background: #01a1fa;" class="top-border"></div>
+			<div style="text-align: center;" id="main-content-head">
+				<h1>Genshin Artifact Generator</h1>
+				How to use this Artifact Generator :: <br/>
+				Choose Artifact Type → Choose Artifact Main Stat → Choose Artifact Sub-Stats → Choose Artifact Level → Copy Code <code>DONE!</code><br/>
+				<code>INFO</code> You only can choose <code>4</code> Types of substat, if you choose more than 4, the game will not detect other stats<br/>
+				<code>INFO</code> This artifact value is based on Artifact Optimizer, if you already have a good set and you want to try it in other "one" just type based on artifact you have<br/>
+				<code>INFO</code> You only can press Sub-stats <code>8</code> Times, because the game have a character limit, if you want add more than 8 you need to use command<br/>
+				<code>INFO</code> If you want to add same substat but multiple times just add "," after the ID, <code>EXAMPLE : 501221,2</code> for Crit Damage 5.2% x 2 = 10.4 %
+			</div>
+			<div id="main-content">
+				<div class="table-filters">
+					<label for="filter-operator" style="display: none;">Input</label>
+					<input type="text" class="input-text" id="filter-name" style="display: none;" data-filter-col="0"/>
+					<select id="filter-type" data-filter-col="1" style="min-width:60; display: none;">
+						<option value="">Artifact Classification</option>
+						<option value="Artifact Type">Artifact Type</option>
+						<option value="Main Stat">Main Stat</option>
+						<option value="Sub Stat">Sub Stat</option>
+					</select>
+					<input id='add' type='button' onclick='ik(this.value);' value='RESET'/>
+					<button class="buttonmain button1" value="2"onclick="nexttwo()">Level 1</button>
+					<button class="buttonmain button1" value="3"onclick="nexttwo()">2</button>
+					<button class="buttonmain button1" value="4"onclick="nexttwo()">3</button>
+					<button class="buttonmain button1" value="5"onclick="nexttwo()">4</button>
+					<button class="buttonmain button1" value="6"onclick="nexttwo()">5</button>
+					<button class="buttonmain button1" value="7"onclick="nexttwo()">6</button>
+					<button class="buttonmain button1" value="8"onclick="nexttwo()">7</button>
+					<button class="buttonmain button1" value="9"onclick="nexttwo()">8</button>
+					<button class="buttonmain button1" value="10"onclick="nexttwo()">9</button>
+					<button class="buttonmain button1" value="11"onclick="nexttwo()">10</button>
+					<button class="buttonmain button1" value="12"onclick="nexttwo()">11</button>
+					<button class="buttonmain button1" value="13"onclick="nexttwo()">12</button>
+					<button class="buttonmain button1" value="14"onclick="nexttwo()">13</button>
+					<button class="buttonmain button1" value="15"onclick="nexttwo()">14</button>
+					<button class="buttonmain button1" value="16"onclick="nexttwo()">15</button>
+					<button class="buttonmain button1" value="17"onclick="nexttwo()">16</button>
+					<button class="buttonmain button1" value="18"onclick="nexttwo()">18</button>
+					<button class="buttonmain button1" value="19"onclick="nexttwo()">18</button>
+					<button class="buttonmain button1" value="20"onclick="nexttwo()">19</button>
+					<button class="buttonmain button1" value="21"onclick="nexttwo()">20</button>
+					<input id='add' type='button' onclick='finalize();' value='COPY'/>
+					<input id="artifactoutput" type="text" value="/gart " /><br/><br/>
+				</div>
+				<div id="artifact-main" style="display: table;">
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Blizzard Strayer</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="71544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="71524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="71554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="71514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="71534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Heart of Depth</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="90544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="90524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="90554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="90514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="90534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Thundersoother</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="72544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="72524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="72554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="72514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="72534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Thundering Fury</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="79544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="79524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="79554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="79514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="79534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Lava Walker</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="73544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="73524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="73554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="73514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="73534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Crimson Witch of Flames&nbsp;&nbsp;</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="80544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="80524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="80554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="80514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="80534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Maiden Beloved</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="74544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="74524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="74554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="74514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="74534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Viridescent Venerer</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="76544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="76524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="76554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="76514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="76534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Gladiator's Finale</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="75544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="75524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="75554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="75514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="75534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Wanderer's Troupe</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="77544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="77524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="77554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="77514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="77534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Noblesse Oblige</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="81544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="81524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="81554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="81514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="81534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Bloodstained Chivalry</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="82544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="82524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="82554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="82514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="82534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Archaic Petra</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="88544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="88524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="88554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="88514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="88534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button> 
+						</div>
+						<div class="addright" style="display: table-cell;">Retracing Bollide</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="89544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="89524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="89554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="89514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="89534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Tenacity of The Millelith</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="91544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="91524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="91554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="91514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="91534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Pale Flame</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="92544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="92524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="92554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="92514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="92534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Shimenawa's Reminiscence&nbsp;&nbsp;</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="93544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="93524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="93554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="93514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="93534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Emblem of Severed Fate</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="94544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="94524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="94554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="94514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="94534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Husk of Opulent Dreams</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="95544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="95524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="95554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="95514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="95534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Ocean-Heud</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="96544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="96524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="96554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="96514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="96534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Vermillion</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="97544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="97524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="97554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="97514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="97534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+						<div class="addright" style="display: table-cell;">Echoes</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="98544&nbsp;" onclick="nextone()"><img src="media/icon/ic1.png"/></button>
+							<button class="buttonmain button2" value="98524&nbsp;" onclick="nextone()"><img src="media/icon/ic2.png"/></button>
+							<button class="buttonmain button2" value="98554&nbsp;" onclick="nextone()"><img src="media/icon/ic3.png"/></button>
+							<button class="buttonmain button2" value="98514&nbsp;" onclick="nextone()"><img src="media/icon/ic4.png"/></button>
+							<button class="buttonmain button2" value="98534&nbsp;" onclick="nextone()"><img src="media/icon/ic5.png"/></button>
+						</div>
+					</div>
+				</div>
+				<div id="artifact-stat" style="display: none;">
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Normal Stats</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="10001&nbsp;"onclick="nexttwo()">HP</button> 
+							<button class="buttonmain button2" value="10002&nbsp;"onclick="nexttwo()">HP%</button> 
+							<button class="buttonmain button2" value="10003&nbsp;"onclick="nexttwo()">ATK</button> 
+							<button class="buttonmain button2" value="10004&nbsp;"onclick="nexttwo()">ATK%</button> 
+							<button class="buttonmain button2" value="10005&nbsp;"onclick="nexttwo()">DEF</button> 
+							<button class="buttonmain button2" value="10006&nbsp;"onclick="nexttwo()">DEF%</button>
+							<button class="buttonmain button2" value="10007&nbsp;"onclick="nexttwo()">ER</button> 
+							<button class="buttonmain button2" value="10008&nbsp;"onclick="nexttwo()">EM</button> 
+							<button class="buttonmain button2" value="13007&nbsp;"onclick="nexttwo()">Crit Rate</button> 
+							<button class="buttonmain button2" value="13008&nbsp;"onclick="nexttwo()">Crit DMG</button> 
+							<button class="buttonmain button2" value="13009&nbsp;"onclick="nexttwo()">Healing +</button> 
+							<button class="buttonmain button2" value="13010&nbsp;"onclick="nexttwo()">EM</button> 
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Damage Bonus</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="15008&nbsp;"onclick="nexttwo()">Pyro DMG</button> 
+							<button class="buttonmain button2" value="15009&nbsp;"onclick="nexttwo()">Electro DMG</button> 
+							<button class="buttonmain button2" value="15010&nbsp;"onclick="nexttwo()">Cryo DMG</button> 
+							<button class="buttonmain button2" value="15011&nbsp;"onclick="nexttwo()">Hydro DMG</button> 
+							<button class="buttonmain button2" value="15012&nbsp;"onclick="nexttwo()">Anemo DMG</button> 
+							<button class="buttonmain button2" value="15013&nbsp;"onclick="nexttwo()">Geo DMG</button> 
+							<button class="buttonmain button2" value="15014&nbsp;"onclick="nexttwo()">Dendro DMG</button> 
+							<button class="buttonmain button2" value="15015&nbsp;"onclick="nexttwo()">Physical DMG</button> 
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Damage Resistance</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="10008&nbsp;"onclick="nexttwo()">Pyro RES</button> 
+							<button class="buttonmain button2" value="10009&nbsp;"onclick="nexttwo()">Electro RES</button> 
+							<button class="buttonmain button2" value="10010&nbsp;"onclick="nexttwo()">Cryo RES</button> 
+							<button class="buttonmain button2" value="10011&nbsp;"onclick="nexttwo()">Hydro RES</button> 
+							<button class="buttonmain button2" value="10012&nbsp;"onclick="nexttwo()">Anemo RES</button> 
+							<button class="buttonmain button2" value="10013&nbsp;"onclick="nexttwo()">Geo RES</button> 
+							<button class="buttonmain button2" value="10014&nbsp;"onclick="nexttwo()">Dendro RES</button> 
+							<button class="buttonmain button2" value="10015&nbsp;"onclick="nexttwo()">Physical RES</button> 
+ 						</div>
+					</div>
+				</div>
+				<div id="artifact-sub" style="display: none;">
+					<div style="display: table-row;">
+						<div style="display: table-cell;">HP</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501021&nbsp;">209</button>
+							<button class="buttonmain button3 subtype1" value="501021,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501021,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501022&nbsp;">239</button>
+							<button class="buttonmain button3 subtype2" value="501022,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501022,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501023&nbsp;">269</button>
+							<button class="buttonmain button3 subtype3" value="501023,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501023,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501024&nbsp;">299</button>
+							<button class="buttonmain button3 subtype4" value="501024,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501024,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">HP%</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501031&nbsp;">4.1</button>
+							<button class="buttonmain button3 subtype1" value="501031,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501031,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501032&nbsp;">4.7</button>
+							<button class="buttonmain button3 subtype2" value="501032,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501032,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501033&nbsp;">5.3</button>
+							<button class="buttonmain button3 subtype3" value="501033,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501033,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501034&nbsp;">5.8</button>
+							<button class="buttonmain button3 subtype4" value="501034,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501034,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">ATK</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501051&nbsp;">14</button>
+							<button class="buttonmain button3 subtype1" value="501051,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501051,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501052&nbsp;">16</button>
+							<button class="buttonmain button3 subtype2" value="501052,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501052,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501053&nbsp;">18</button>
+							<button class="buttonmain button3 subtype3" value="501053,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501053,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501054&nbsp;">19</button>
+							<button class="buttonmain button3 subtype4" value="501054,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501054,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">ATK%</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501061&nbsp;">4.1</button>
+							<button class="buttonmain button3 subtype1" value="501061,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501061,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501062&nbsp;">4.7</button>
+							<button class="buttonmain button3 subtype2" value="501062,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501062,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501063&nbsp;">5.3</button>
+							<button class="buttonmain button3 subtype3" value="501063,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501063,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501064&nbsp;">5.8</button>
+							<button class="buttonmain button3 subtype4" value="501064,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501064,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">DEF</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501081&nbsp;">16</button>
+							<button class="buttonmain button3 subtype1" value="501081,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501081,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501082&nbsp;">19</button>
+							<button class="buttonmain button3 subtype2" value="501082,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501082,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501083&nbsp;">21</button>
+							<button class="buttonmain button3 subtype3" value="501083,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501083,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501084&nbsp;">23</button>
+							<button class="buttonmain button3 subtype4" value="501084,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501084,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">DEF%</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501091&nbsp;">5.1</button>
+							<button class="buttonmain button3 subtype1" value="501091,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501091,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501092&nbsp;">5.8</button>
+							<button class="buttonmain button3 subtype2" value="501092,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501092,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501093&nbsp;">6.6</button>
+							<button class="buttonmain button3 subtype3" value="501093,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501093,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501094&nbsp;">7.3</button>
+							<button class="buttonmain button3 subtype4" value="501094,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501094,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Energy Recharge</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501231&nbsp;">4.5</button>
+							<button class="buttonmain button3 subtype1" value="501231,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501231,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501232&nbsp;">5.2</button>
+							<button class="buttonmain button3 subtype2" value="501232,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501232,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501233&nbsp;">5.8</button>
+							<button class="buttonmain button3 subtype3" value="501233,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501233,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501234&nbsp;">6.5</button>
+							<button class="buttonmain button3 subtype4" value="501234,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501234,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;" class="addright2">Elemental Mastery</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501241&nbsp;">16</button>
+							<button class="buttonmain button3 subtype1" value="501241,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501241,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501242&nbsp;">19</button>
+							<button class="buttonmain button3 subtype2" value="501242,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501242,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501243&nbsp;">21</button>
+							<button class="buttonmain button3 subtype3" value="501243,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501243,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501244&nbsp;">23</button>
+							<button class="buttonmain button3 subtype4" value="501244,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501244,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Crit Rate</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501201&nbsp;">2.7</button>
+							<button class="buttonmain button3 subtype1" value="501201,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501201,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501202&nbsp;">3.1</button>
+							<button class="buttonmain button3 subtype2" value="501202,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501202,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501203&nbsp;">3.5</button>
+							<button class="buttonmain button3 subtype3" value="501203,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501203,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501204&nbsp;">3.9</button>
+							<button class="buttonmain button3 subtype4" value="501204,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501204,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Crit Damage</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button3 subtype1" value="501221&nbsp;">5.4</button>
+							<button class="buttonmain button3 subtype1" value="501221,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype1" value="501221,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype2" value="501222&nbsp;">6.2</button>
+							<button class="buttonmain button3 subtype2" value="501222,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype2" value="501222,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype3" value="501223&nbsp;">7</button>
+							<button class="buttonmain button3 subtype3" value="501223,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype3" value="501223,5&nbsp;">x5</button>&nbsp;|
+							<button class="buttonmain button3 subtype4" value="501224&nbsp;">7.8</button>
+							<button class="buttonmain button3 subtype4" value="501224,2&nbsp;">x2</button>
+							<button class="buttonmain button3 subtype4" value="501224,5&nbsp;">x5</button>
+						</div>
+					</div>
+					<div style="display: table-row;">
+						<div style="display: table-cell;">Special Substat</div>
+						<div style="display: table-cell;">
+							<button class="buttonmain button2" value="992001&nbsp;">Shield Strength</button>
+							<button class="buttonmain button2" value="991001&nbsp;">Healing Bonus</button>
+							<button class="buttonmain button2" value="990001&nbsp;">Incoming Healing Bonus</button>
+							<button class="buttonmain button2" value="989001&nbsp;">CD Reduction</button>
+							<button class="buttonmain button2" value="988001&nbsp;">Movement SPD</button>
+							<button class="buttonmain button2" value="971001&nbsp;">DMG Bonus</button>
+							<button class="buttonmain button2" value="970001&nbsp;">DMG Reduction</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="credit">Just a personal project</div>
+		</section>
+		<!-- General Footer -->
+		<!-- Afterload script & css-->
+		<script src="source/js/jquery-3.3.1.min.js"></script>
+		<script src="source/js/filtable.js?dev"></script>
+		<script src="source/js/gen_char_copy.js"></script>
+		<!-- <script type="text/javascript">
+		    $(window).on('load resize',function(){
+		        if($(window).width() < 950){
+		            window.location = "subweapon.html"
+		        }
+		    });
+		</script> -->
+		<script>
+		$('nav li').hover(
+			function() {
+				$('ul', this).stop().slideDown(200); },
+			function() {
+		    	$('ul', this).stop().slideUp(200); }
+		);
+		</script>
+		<script>
+			$(function(){
+			// Basic Filtable usage - pass in a div with the filters and the plugin will handle it
+			$('#game').filtable({ controlPanel: $('.table-filters')});
+			});
+		</script>
+		<script>
+			var input = document.querySelector("#artifactoutput")
+			var a = document.querySelectorAll("button.buttonmain")
+
+
+			for (i = 0; i < a.length; i++) {
+			  a[i].addEventListener("click", function(event) {
+			    input.value = input.value + event.currentTarget.value
+			  })
+			}
+		</script>
+		<script>
+			function finalize() {
+			  /* Get the text field */
+			  var copyText = document.getElementById("artifactoutput");
+
+			  /* Select the text field */
+			  copyText.select();
+			  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+			   /* Copy the text inside the text field */
+				document.execCommand("copy");
+
+			  /* Alert the copied text */
+			  alert("Command Copied: " + copyText.value);
+			}
+		</script>
+		<script>
+			function ik(val){
+				document.getElementById('artifactoutput').value = "/gart ";
+				document.getElementById('artifact-sub').style.display = "none";
+				document.getElementById('artifact-stat').style.display = "none";
+				document.getElementById('artifact-main').style.display = "block";
+			}
+			function nextone() {
+				document.getElementById('artifact-main').style.display = "none";
+				document.getElementById('artifact-stat').style.display = "block";
+			}
+			function nexttwo() {
+				document.getElementById('artifact-stat').style.display = "none";
+				document.getElementById('artifact-sub').style.display = "block";
+			}
+		</script>
+</html>
