@@ -106,8 +106,48 @@
 			code a {
 				color: #fffff1; }
 			.table-filters {
-				margin: 0px auto;
+				margin: 10px auto;
 				width: 65%; }
+			.mobile-show {
+				display: none; }
+
+			@media screen and (min-width: 42em) and (max-width: 64em) {
+				#restricted {
+					width: fit-content; }
+				#main-content {
+					padding: 0rem;
+					background: #222222; }
+				#main-content code {
+					white-space: nowrap }
+				.mobile-hide {
+					display: none; }
+				.mobile-show {
+					display: block; } }
+
+			@media screen and (max-width: 42em) {
+				#restricted {
+					width: -webkit-fill-available; }
+				#main-content {
+					padding: 0rem;
+					background: #222222; }
+				#main-content code {
+					white-space: nowrap }
+				#main-content table {
+					width: -webkit-fill-available; }
+				.mobile-hide {
+					display: none; }
+				.mobile-show {
+					display: block; }
+				.table-filters {
+					margin: 10px auto;
+					width: 90%; }
+				li a, nav ul li span {
+					color: #fff;
+					display: block;
+					font-size: 14px;
+					padding: 5px 5px;
+					transition: 0.3s linear;
+					text-decoration: none; } }
 		</style>
 	</head>
 	<!-- Front Page Content -->
@@ -116,13 +156,12 @@
 			<nav>
 				<div class="container">
 					<ul>
-						<li><a href="index">Basic CMD</a></li>
-						<li><a href="character">Character</a></li>
-						<li><a href="weapon">Weapon</a></li>
-						<li><a href="resource">Resources</a></li>
-						<li><a href="monster">Monster</a></li>
-						<li><a href="artifact">Artifact</a></li>
-						<li><span>isephyr v1.623.221</span></li>
+						<li><a href="subdefault">Basic</a></li>
+						<li><a href="subcharacter">Character</a></li>
+						<li><a href="subweapon">Weapon</a></li>
+						<li><a href="subresource">Resources</a></li>
+						<li><a href="submonster">Monster</a></li>
+						<li><a href="subartifact">Artifact</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -138,8 +177,8 @@
 			</div>
 			<div id="main-content">
 				<div class="table-filters">
-					<label for="filter-operator">Item Name</label>
-					<input type="text" class="input-text" id="filter-name" data-filter-col="1">
+					<label class="mobile-hide" for="filter-operator">Item Name</label>
+					<input type="text" class="input-text" id="filter-name" data-filter-col="1" placeholder="Type Item Name">
 					<select id="filter-type" data-filter-col="2" style="min-width:60px">
 						<option value="">Item Type</option>
 						<option value="Item">Item</option>
@@ -159,19 +198,14 @@
 						<option value="N/A">N/A</option>
 						<option value="Necessary Items">Necessary Items</option>
 					</select>
-					<label for="filter-uid" style="display:none;">UID</label>
-					<input id="uid-input" type="text" placeholder="target UID" class="input-text" style="display:none;">
-					<br/>
-					<b style="display:none;">Output</b> &nbsp;<input id="main-output" style="display:none;" type="text" class="input-text-output" placeholder="/givechar [id] [level] or /give [id]" id="filter-uid">
-					<a><code style="display:none;">COPY CODE</code></a>
 				</div>
 				<table id="game">
 					<thead>
 						<tr>
-							<th>Item ID</th>
-							<th>Item Name</th>
+							<th>ID</th>
+							<th>Name</th>
 							<th>Type</th>
-							<th>Copy ( CLICK THE BUTTON TO COPY THE COMMAND )</th>
+							<th>Copy</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -180,7 +214,7 @@
 							<td>101</td>
 							<td>Character EXP</td>
 							<td>Basic Item</td>
-							<td><code><a onclick="CopyMe('/give 101 1')">Give 1</a></code> <code><a onclick="CopyMe('/give 101 999999')">Give 999999</a></code></td>
+							<td><code><a onclick="CopyMe('/give 101 1')">Give 1</a></code> <code><a onclick="CopyMe('/give 101 999999')">999999</a></code></td>
 						</tr>
 						<tr>
 							<td>102</td>
@@ -223,7 +257,7 @@
 							<td>202</td>
 							<td>Mora</td>
 							<td>Basic Item</td>
-							<td><code><a onclick="CopyMe('/give 202 1')">Give 1</a></code> <code><a onclick="CopyMe('/give 202 50000')">Give 50000</a></code></td>
+							<td><code><a onclick="CopyMe('/give 202 1')">Give 1</a></code> <code><a onclick="CopyMe('/give 202 50000')">50000</a></code></td>
 						</tr>
 						<tr>
 							<td>203</td>
@@ -6108,20 +6142,13 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="credit">Just a personal project</div>
+			<div class="credit">Just a personal project | isephyr v1.623.221</div>
 		</section>
 		<!-- General Footer -->
 		<!-- Afterload script & css-->
 		<script src="source/js/jquery-3.3.1.min.js"></script>
 		<script src="source/js/filtable.js?dev"></script>
 		<script src="source/js/gen_char_copy.js"></script>
-		<script type="text/javascript">
-			$(window).on('load resize',function(){
-				if($(window).width() < 950){
-					window.location = "subresource"
-				}
-			});
-		</script>
 		<script>
 			function CopyMe(TextToCopy) {
 				var TempText = document.createElement("input");
